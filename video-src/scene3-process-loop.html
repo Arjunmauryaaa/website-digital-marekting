@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Plan, create, launch, improve</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  svg.ring { position: absolute; left: 340px; top: 40px; width: 600px; height: 520px; overflow: visible; }
+  .track { fill: none; stroke: rgba(255,255,255,.14); stroke-width: 3; }
+  .prog { fill: none; stroke: var(--cyan); stroke-width: 4; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; animation: run 12s linear .6s forwards; }
+  @keyframes run { to { stroke-dashoffset: 0; } }
+  .node { position: absolute; width: 0; height: 0; }
+  .dot { position: absolute; left: -34px; top: -34px; width: 68px; height: 68px; border-radius: 50%; background: var(--panel2); border: 2px solid var(--line); display: grid; place-items: center;
+         font: 800 22px Manrope, sans-serif; color: var(--muted); animation: nodeOn .6s cubic-bezier(.34,1.4,.64,1) var(--t) forwards; }
+  @keyframes nodeOn { to { background: var(--blue); border-color: var(--periwinkle); color: #fff; scale: 1.14; } }
+  .lbl { position: absolute; width: 220px; text-align: center; font: 700 22px Manrope, sans-serif; letter-spacing: -.02em; color: var(--muted); animation: lblOn .5s ease var(--t) forwards; }
+  @keyframes lblOn { to { color: #fff; } }
+  .lbl small { display: block; margin-top: 4px; font: 400 16px/1.4 Inter, sans-serif; letter-spacing: 0; color: var(--muted); }
+  .center { position: absolute; left: 540px; top: 258px; width: 200px; text-align: center; }
+  .center h2 { font-size: 40px; line-height: 1.02; opacity: 0; animation: fade .8s ease 10.6s forwards; }
+  @keyframes fade { to { opacity: 1; } }
+  .bars { position: absolute; left: 1050px; top: 200px; display: flex; align-items: flex-end; gap: 12px; height: 170px; opacity: 0; animation: fade .6s ease 9s forwards; }
+  .bars i { width: 30px; border-radius: 8px 8px 0 0; background: var(--cyan); height: 0; animation: grow 1s cubic-bezier(.22,.61,.36,1) forwards; }
+  .bars i:nth-child(1){--h:46px;animation-delay:9.2s} .bars i:nth-child(2){--h:78px;animation-delay:9.4s} .bars i:nth-child(3){--h:64px;animation-delay:9.6s} .bars i:nth-child(4){--h:112px;animation-delay:9.8s} .bars i:nth-child(5){--h:140px;animation-delay:10s}
+  @keyframes grow { to { height: var(--h); } }
+  .barnote { position: absolute; left: 990px; top: 392px; width: 260px; text-align: center; font: 500 14px Inter, sans-serif; color: var(--muted); opacity: 0; animation: fade .6s ease 10.2s forwards; }
+  .brief { position: absolute; left: 70px; top: 250px; width: 230px; opacity: 0; animation: fade .6s ease .8s forwards; }
+  .brief div { border: 1px solid var(--line); border-radius: 12px; padding: 11px 14px; font: 600 15px Manrope, sans-serif; color: var(--muted); margin-bottom: 10px; background: var(--panel); }
+  .c1 { animation: capIn 5s ease .4s both; } .c2 { animation: capIn 5.2s ease 5.2s both; } .c3 { animation: capHold 4.4s ease 10.5s both; }
+</style>
+</head>
+<body class="hold">
+  <div class="tag">Digital transformation · explainer</div>
+  <svg class="ring" viewBox="0 0 600 520">
+    <circle class="track" cx="300" cy="260" r="150"></circle>
+    <circle class="prog" cx="300" cy="260" r="150" pathLength="1" transform="rotate(-90 300 260)"></circle>
+  </svg>
+  <div id="nodes"></div>
+  <div class="center"><h2>Always <em>improving</em></h2></div>
+  <div class="bars"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="barnote">Illustrative only: review, learn, adjust</div>
+  <div class="cap c1">Discover and plan.<small>Understand the business before building anything.</small></div>
+  <div class="cap c2">Create with clear milestones.<small>Design, develop and implement, with you in the loop.</small></div>
+  <div class="cap c3">Launch, review, <em>improve.</em><small>The cycle continues after go-live.</small></div>
+  <div class="grain"></div>
+<script>
+  const steps = [["01", "Discover", "Goals and audience"], ["02", "Plan", "Scope and milestones"], ["03", "Create", "Design and build"], ["04", "Launch", "Review and improve"]];
+  const cx = 640, cy = 300, r = 150, el = document.getElementById("nodes");
+  steps.forEach(([n, t, s], i) => {
+    const a = (-90 + i * 90) * Math.PI / 180;
+    const x = cx + r * Math.cos(a), y = cy + r * Math.sin(a);
+    const at = (0.6 + 12 * (i / 4) + 0.1).toFixed(2) + "s";
+    const node = document.createElement("div");
+    node.className = "node";
+    node.style.cssText = `left:${x}px;top:${y}px;--t:${at}`;
+    const side = i === 1 ? [48, -22, "left"] : i === 3 ? [-268, -22, "right"] : [-110, i === 0 ? -108 : 44, "center"];
+    node.innerHTML = `<div class="dot">${n}</div><div class="lbl" style="left:${side[0]}px;top:${side[1]}px;text-align:${side[2]}">${t}<small>${s}</small></div>`;
+    el.appendChild(node);
+  });
+</script>
+</body>
+</html>

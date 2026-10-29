@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>From scattered to connected</title>
+<link rel="stylesheet" href="common.css">
+<style>
+  .pos { position: absolute; left: 0; top: 0; width: 0; height: 0; transform: translate(var(--sx), var(--sy)); animation: gather 3.4s cubic-bezier(.65,0,.3,1) 6.2s forwards; }
+  @keyframes gather { to { transform: translate(var(--ex), var(--ey)); } }
+  .bob { position: absolute; left: -96px; top: -32px; width: 192px; height: 64px; border-radius: 16px; background: var(--panel2); border: 1px solid var(--line);
+         display: flex; align-items: center; gap: 12px; padding: 0 18px; font: 700 20px Manrope, sans-serif; letter-spacing: -.01em;
+         transform: rotate(var(--sr)); animation: drift 5.6s ease-in-out infinite alternate, straighten 1.6s ease 6.4s forwards, appear .6s ease var(--d) both; box-shadow: 0 20px 40px -24px rgba(0,0,0,.7); }
+  @keyframes drift { from { translate: -10px -6px; } to { translate: 12px 8px; } }
+  @keyframes straighten { to { transform: rotate(0deg); } }
+  @keyframes appear { from { opacity: 0; scale: .9; } }
+  .ic { width: 30px; height: 30px; border-radius: 9px; flex: none; display: grid; place-items: center; font-size: 15px; }
+  .hub { position: absolute; left: 640px; top: 322px; width: 0; height: 0; }
+  .hub .core { position: absolute; left: -78px; top: -78px; width: 156px; height: 156px; border-radius: 50%; background: var(--blue); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; text-align: center;
+               font: 800 24px/1 Manrope, sans-serif; letter-spacing: -.02em; opacity: 0; scale: .4; animation: hubIn .9s cubic-bezier(.34,1.4,.64,1) 7.4s forwards; box-shadow: 0 30px 60px -30px rgba(0,0,0,.8); }
+  .hub .ring { position: absolute; left: -110px; top: -110px; width: 220px; height: 220px; border-radius: 50%; border: 1px solid rgba(210,218,255,.35); opacity: 0; animation: ringPulse 2.4s ease-out 9.6s infinite; }
+  @keyframes hubIn { to { opacity: 1; scale: 1; } }
+  @keyframes ringPulse { 0% { opacity: .8; scale: .8; } 100% { opacity: 0; scale: 1.7; } }
+  svg.lines { position: absolute; inset: 0; width: 1280px; height: 720px; }
+  .spoke { stroke: rgba(210,218,255,.5); stroke-width: 2; stroke-dasharray: 1; stroke-dashoffset: 1; animation: draw 1.3s ease 9.2s forwards; }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+  .stub { stroke: rgba(255,255,255,.28); stroke-width: 2; stroke-dasharray: 6 9; animation: stubOut .8s ease 6s forwards, appear .6s ease .8s both; }
+  @keyframes stubOut { to { opacity: 0; } }
+  .pulse { position: absolute; left: 640px; top: 322px; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--cyan); opacity: 0; animation: travel 2.2s ease-in-out infinite; animation-delay: var(--pd); }
+  @keyframes travel { 0% { opacity: 0; transform: translate(0,0); } 15% { opacity: 1; } 85% { opacity: 1; } 100% { opacity: 0; transform: translate(var(--tx), var(--ty)); } }
+  .c1 { animation: capIn 5.4s ease .3s both; }
+  .c2 { animation: capIn 4.6s ease 6.1s both; }
+  .c3 { animation: capHold 5s ease 10.9s both; }
+</style>
+</head>
+<body class="hold">
+  <div class="tag">Digital transformation · explainer</div>
+  <svg class="lines" id="lines" viewBox="0 0 1280 720"></svg>
+  <div id="cards"></div>
+  <div id="pulses"></div>
+  <div class="hub"><div class="ring"></div><div class="core">One<br><span style="font-family:'Instrument Serif',serif;font-style:italic;font-weight:400;font-size:27px">strategy</span></div></div>
+  <div class="cap c1">Scattered tools. Mixed messages.<small>Most businesses start here.</small></div>
+  <div class="cap c2">Transformation starts with a plan.<small>Strategy first, then design, development and marketing.</small></div>
+  <div class="cap c3">One connected <em>digital presence.</em><small>Every channel working toward the same goal.</small></div>
+  <div class="grain"></div>
+<script>
+  const items = [
+    ["Website", "#4a5ff0", "▤", [-470, -220, -9], [-1.0]],
+    ["Social media", "#4de2d0", "◎", [380, -250, 7], [-1.0]],
+    ["Paid ads", "#f08a24", "◉", [470, 40, -6], [-1.0]],
+    ["SEO", "#8c99ff", "⌕", [300, 250, 8], [-1.0]],
+    ["Email", "#e0883a", "✉", [-330, 240, -7], [-1.0]],
+    ["Analytics", "#c6ff3d", "▥", [-480, 20, 6], [-1.0]],
+  ];
+  const cx = 640, cy = 322, rx = 360, ry = 180;
+  const cards = document.getElementById("cards"), lines = document.getElementById("lines"), pulses = document.getElementById("pulses");
+  const scatter = [[170, 190, -9], [980, 150, 7], [1090, 380, -6], [900, 500, 8], [300, 500, -7], [150, 340, 6]];
+  items.forEach(([label, color, glyph], i) => {
+    const a = (-90 + i * 60) * Math.PI / 180;
+    const ex = cx + rx * Math.cos(a), ey = cy + ry * Math.sin(a);
+    const [sx, sy, sr] = scatter[i];
+    const pos = document.createElement("div");
+    pos.className = "pos";
+    pos.style.cssText = `--sx:${sx}px;--sy:${sy}px;--ex:${ex}px;--ey:${ey}px`;
+    pos.innerHTML = `<div class="bob" style="--sr:${sr}deg;--d:${0.3 + i * 0.18}s"><span class="ic" style="background:${color};color:#0b1020">${glyph}</span>${label}</div>`;
+    cards.appendChild(pos);
+    const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    line.setAttribute("x1", cx); line.setAttribute("y1", cy); line.setAttribute("x2", ex); line.setAttribute("y2", ey);
+    line.setAttribute("class", "spoke"); line.setAttribute("pathLength", "1");
+    lines.appendChild(line);
+    const stub = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    const [nx, ny] = scatter[(i + 1) % 6];
+    stub.setAttribute("x1", sx); stub.setAttribute("y1", sy); stub.setAttribute("x2", nx * 0.55 + sx * 0.45); stub.setAttribute("y2", ny * 0.55 + sy * 0.45);
+    stub.setAttribute("class", "stub");
+    lines.appendChild(stub);
+    const p = document.createElement("div");
+    p.className = "pulse";
+    p.style.cssText = `--tx:${(ex - cx) * 0.8}px;--ty:${(ey - cy) * 0.8}px;--pd:${10.6 + i * 0.35}s`;
+    pulses.appendChild(p);
+  });
+</script>
+</body>
+</html>

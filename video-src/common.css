@@ -1,0 +1,15 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Manrope:wght@600;700;800&display=swap");
+:root { --navy:#0b1020; --panel:#141b30; --panel2:#1a2238; --line:rgba(255,255,255,.14); --text:#fff; --muted:#a9b2c6; --blue:#4a5ff0; --cyan:#4de2d0; --periwinkle:#d2daff; }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1280px; height: 720px; background: var(--navy); overflow: hidden; color: var(--text); font-family: Inter, system-ui, sans-serif; }
+body { position: relative; }
+body.hold *, body.hold *::before, body.hold *::after { animation-play-state: paused !important; }
+h1, h2, .h { font-family: Manrope, Inter, sans-serif; font-weight: 800; letter-spacing: -0.03em; }
+em { font-family: "Instrument Serif", Georgia, serif; font-style: italic; font-weight: 400; color: var(--periwinkle); }
+.grain { position: absolute; inset: 0; pointer-events: none; opacity: .5; background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .06 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"); }
+.tag { position: absolute; left: 56px; top: 44px; font: 600 15px Manrope, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--cyan); display: flex; align-items: center; gap: 12px; }
+.tag::before { content: ""; width: 28px; height: 1px; background: currentColor; }
+.cap { position: absolute; left: 0; right: 0; bottom: 56px; text-align: center; font: 800 38px/1.15 Manrope, sans-serif; letter-spacing: -.03em; opacity: 0; padding: 0 90px; }
+.cap small { display: block; margin-top: 10px; font: 400 21px/1.4 Inter, sans-serif; letter-spacing: 0; color: var(--muted); }
+@keyframes capIn { 0% { opacity: 0; transform: translateY(18px); } 12% { opacity: 1; transform: none; } 88% { opacity: 1; transform: none; } 100% { opacity: 0; transform: translateY(-10px); } }
+@keyframes capHold { 0% { opacity: 0; transform: translateY(18px); } 12% { opacity: 1; transform: none; } 100% { opacity: 1; transform: none; } }

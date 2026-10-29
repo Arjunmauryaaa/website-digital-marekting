@@ -1,0 +1,22 @@
+# dependencies
+node_modules/
+
+# build output
+.next/
+out/
+build/
+*.tsbuildinfo
+next-env.d.ts
+
+# secrets: never commit real keys. Only the template is tracked.
+.env*
+!.env.example
+
+# test output
+test-results/
+playwright-report/
+
+# misc
+.DS_Store
+*.log
+.vercel
