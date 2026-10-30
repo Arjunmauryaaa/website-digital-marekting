@@ -7,9 +7,9 @@ const env = (v: string | undefined) => (v && v.trim() ? v.trim() : undefined);
 export const site = {
   /** PLACEHOLDER: set NEXT_PUBLIC_AGENCY_NAME, or edit this default. */
   name: env(process.env.NEXT_PUBLIC_AGENCY_NAME) ?? "Agency Name",
-  tagline: "Independent digital agency working worldwide",
+  tagline: "Websites and marketing that bring you customers",
   description:
-    "An independent digital marketing and website development agency helping businesses in the US, UK, Canada, Australia, UAE and beyond grow through strategy, social media and high-performing websites.",
+    "We build clear, fast websites and run focused marketing, so the right people find your business, trust it and get in touch. Working remotely with clients in the US, UK, Canada, Australia, UAE and beyond.",
   url: (env(process.env.NEXT_PUBLIC_SITE_URL) ?? "http://localhost:3000").replace(/\/$/, ""),
   /** Public contact email. Leave unset to show the placeholder instead of a link. */
   email: env(process.env.NEXT_PUBLIC_CONTACT_EMAIL),

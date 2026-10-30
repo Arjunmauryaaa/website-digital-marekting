@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Faq } from "@/components/sections/faq";
 import { ContactSection } from "@/components/sections/contact-section";
-import { CapabilityStrip, DevShowcase, FactsBand, Hero, Packages, Principles, ProcessSection, ServicesSection, WhyUs, WorkSection } from "@/components/sections/home-sections";
+import { CapabilityStrip, DevShowcase, FactsBand, Hero, Packages, Principles, ProblemsSolved, ProcessSection, ServicesSection, WhyUs, WorkSection } from "@/components/sections/home-sections";
 import { VideoShowcase } from "@/components/sections/video-showcase";
-import { Commitments, GlobalReach, hasTestimonials, InsightsTeaser, Testimonials, ToolsTeaser, Verify } from "@/components/sections/trust-sections";
+import { ClientNumbers, Commitments, GlobalReach, hasTestimonials, InsightsTeaser, Testimonials, ToolsTeaser, Verify } from "@/components/sections/trust-sections";
 import { SectionHead } from "@/components/ui/ui";
 import { JsonLd } from "@/components/ui/json-ld";
 import { faqs } from "@/content/site-content";
@@ -22,6 +22,8 @@ export default function HomePage() {
       <Hero />
       <CapabilityStrip />
       <FactsBand />
+      <ClientNumbers />
+      <ProblemsSolved />
       <ServicesSection />
       <WhyUs />
       <VideoShowcase />

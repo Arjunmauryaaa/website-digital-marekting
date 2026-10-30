@@ -63,7 +63,22 @@ export const faqs = [
   { q: "How long does a website take to build?", a: "Timelines depend on the size of the project, required features, content availability, and approval process. A timeline is confirmed after the scope is agreed." },
   { q: "Do you manage social media accounts?", a: "We can help with agreed content planning, creation, scheduling, and reporting. The exact responsibilities are confirmed before the engagement begins." },
   { q: "Do you guarantee results?", a: "No responsible agency can guarantee specific sales, leads, rankings, or advertising outcomes. We focus on clear deliverables, informed decisions, and ongoing improvement." },
+  { q: "What will it cost?", a: "Every business is different, so we don't publish one-size-fits-all prices. After a free first call we send a written quote showing exactly what is included, the price and the timeline. There is no obligation to accept it." },
+  { q: "How do contracts and payments work?", a: "Everything is agreed in a written proposal before work starts: scope, price, payment schedule, revisions and who owns the final files. We will confirm with you which payment options suit your country." },
+  { q: "Who owns my website, content and accounts?", a: "You do. We work inside accounts you own wherever possible, and ownership of the final work is stated in your proposal, so you are never locked in." },
+  { q: "Can we work together across time zones?", a: "Yes. We work remotely and schedule calls at times that suit you. Our contact page shows the working hours we overlap with your location." },
+  { q: "Is there a minimum contract?", a: "One-off projects such as a website have a fixed scope and price. Ongoing support, such as social media or marketing, is agreed in the proposal, including how long it runs and how either side can end it." },
   { q: "How do we get started?", a: "Submit a project enquiry with a few details about your business and goals. We will review the requirements and discuss the next steps." },
+];
+
+/** Everyday problems a visitor recognises, each with a plain answer. Keep these as process promises, never promised results. */
+export const problems = [
+  { q: "My website looks outdated and doesn't bring enquiries.", a: "We build a clear, fast website that explains what you do in seconds and makes it easy to contact you.", href: "/services/website-design-development" },
+  { q: "I post on social media, but nothing comes of it.", a: "We plan content around your customers and your goals, not just likes, and keep it consistent.", href: "/services/social-media-management" },
+  { q: "People visit my site, then leave without calling or buying.", a: "We improve your page layout, wording and buttons so visitors know exactly what to do next.", href: "/services/website-design-development" },
+  { q: "I can't be found on Google.", a: "We fix the search basics: clear pages, the right words, and fast loading on phones.", href: "/services" },
+  { q: "I spend on ads and can't tell if they work.", a: "We set up tracking and report in plain English what is working, what isn't, and what to change.", href: "/services" },
+  { q: "I don't have time to manage all of this.", a: "One team handles your website, content and campaigns. You get one contact and regular updates.", href: "/contact" },
 ];
 
 export const callCovers = ["Business goals", "Current online presence", "Required services", "Project scope", "Potential next steps"];
@@ -74,8 +89,8 @@ export const callCovers = ["Business goals", "Current online presence", "Require
  * Every line must stay true: no results, numbers or claims you can't back up.
  */
 export const heroMessages = [
-  "We help ambitious businesses grow through strategic digital marketing, engaging social media, and high-performing websites designed to turn attention into meaningful action.",
-  "From your first website to a smarter marketing strategy, we bring your digital presence together under one roof.",
-  "Clear strategy, thoughtful design and clean development, planned together and built for the way your customers search, scroll and buy.",
+  "Is your website not bringing enquiries, or your social media not bringing customers? We fix that. We build clear, fast websites and run focused marketing, so the right people find you, trust you and get in touch.",
+  "One team for your website, your content and your campaigns, with one person who knows your project and keeps you updated in plain English.",
+  "You get a written plan, a fixed scope and a clear price before any work begins. No surprises, no jargon.",
   "Try our free AI tools: audit your website, plan a week of social content and get a 30-day growth roadmap in minutes.",
 ];

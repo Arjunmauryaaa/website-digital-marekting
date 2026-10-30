@@ -17,6 +17,21 @@ export type Testimonial = { quote: string; name: string; role: string; company: 
 
 export type Credential = { name: string; issuer: string; /** Link to the public credential so visitors can verify it. */ href: string };
 
+/** A verified figure about your real track record, e.g. { value: "42", label: "Clients served since 2021" }. */
+export type ClientStat = { value: string; label: string; /** Where the number comes from, shown small underneath so visitors can trust it. */ note?: string };
+
+/** A client you have written permission to name. Add a logo (put it in /public) or leave it out to show the name as text. */
+export type ClientLogo = { name: string; logo?: { src: string; alt: string; width: number; height: number }; href?: string };
+
+/**
+ * Real numbers only: clients served, years trading, countries, projects delivered. Each must be something you can prove.
+ * Add at least one and a "Trusted by" band appears on the homepage. Leave empty to show nothing.
+ */
+export const clientStats: ClientStat[] = [];
+
+/** Clients you may name publicly. Add them and their names or logos appear in the same band. */
+export const clientLogos: ClientLogo[] = [];
+
 /** Founder and team. Add real entries, with permission, and an About-page "Meet the team" section appears. */
 export const team: TeamMember[] = [];
 

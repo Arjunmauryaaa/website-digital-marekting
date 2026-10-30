@@ -65,8 +65,8 @@ test.describe("navigation and links", () => {
     test.skip(isMobile, "desktop only");
     await page.goto("/");
     await expect(page.getByRole("navigation", { name: "Primary" }).getByRole("link")).toHaveCount(7);
-    await page.getByRole("banner").getByRole("link", { name: "Let's Talk" }).click();
-    await expect(page).toHaveURL(/\/contact$/);
+    await page.getByRole("banner").getByRole("link", { name: "Book a Free Call" }).click();
+    await expect(page).toHaveURL(/\/contact#book$/);
   });
 });
 
@@ -185,7 +185,7 @@ test.describe("videos", () => {
 });
 
 test.describe("AI-style typing effect", () => {
-  const FIRST = "We help ambitious businesses grow through strategic digital marketing, engaging social media, and high-performing websites designed to turn attention into meaningful action.";
+  const FIRST = "Is your website not bringing enquiries, or your social media not bringing customers? We fix that. We build clear, fast websites and run focused marketing, so the right people find you, trust you and get in touch.";
   const hero = (page: import("@playwright/test").Page) => page.locator(".hero .rot");
   const typed = (page: import("@playwright/test").Page) => page.locator(".hero .rot__typed");
 

@@ -74,9 +74,11 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <ButtonLink href="/contact" small className="header__cta">
-            Let&apos;s Talk
-          </ButtonLink>
+          {site.bookingUrl ? (
+            <ButtonLink href={site.bookingUrl} external small className="header__cta">Book a Free Call</ButtonLink>
+          ) : (
+            <ButtonLink href="/contact#book" small className="header__cta">Book a Free Call</ButtonLink>
+          )}
           <button ref={btnRef} type="button" className="menu-btn" aria-expanded={open} aria-controls="mobile-menu" aria-label={open ? "Close menu" : "Open menu"} onClick={() => setOpen((v) => !v)}>
             <span />
           </button>
@@ -91,7 +93,7 @@ export function Header() {
             </Link>
           ))}
         </nav>
-        <ButtonLink href="/contact">Let&apos;s Talk</ButtonLink>
+        {site.bookingUrl ? <ButtonLink href={site.bookingUrl} external>Book a Free Call</ButtonLink> : <ButtonLink href="/contact#book">Book a Free Call</ButtonLink>}
       </div>
     </>
   );

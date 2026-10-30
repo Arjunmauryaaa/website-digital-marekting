@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Arrow, Icon } from "@/components/ui/icons";
 import { SectionHead } from "@/components/ui/ui";
 import { articles } from "@/content/insights";
-import { commitments, credentials, team, testimonials, wontPromise } from "@/content/trust";
+import { clientLogos, clientStats, commitments, credentials, team, testimonials, wontPromise } from "@/content/trust";
 import { site } from "@/config/site";
 import { TimeZones } from "./time-zones";
 
@@ -39,6 +39,45 @@ export function Commitments() {
   );
 }
 
+/** "Trusted by": verified numbers and permissioned client names. Renders nothing until src/content/trust.ts has real entries. */
+export function ClientNumbers() {
+  if (clientStats.length === 0 && clientLogos.length === 0) return null;
+  return (
+    <section className="section clients" aria-labelledby="clients-title">
+      <div className="container">
+        <SectionHead eyebrow="Our track record" title={<>Trusted by Businesses <em>Around the World</em></>} id="clients-title" />
+        {clientStats.length > 0 && (
+          <ul className="stats">
+            {clientStats.map((s, i) => (
+              <li className="stat" key={s.label} data-reveal style={{ "--d": `${i * 70}ms` } as React.CSSProperties}>
+                <b className="stat__value">{s.value}</b>
+                <span className="stat__label">{s.label}</span>
+                {s.note && <small className="stat__note">{s.note}</small>}
+              </li>
+            ))}
+          </ul>
+        )}
+        {clientLogos.length > 0 && (
+          <ul className="logos" aria-label="Clients we have worked with">
+            {clientLogos.map((c) => {
+              const inner = c.logo ? <Image src={c.logo.src} alt={c.logo.alt} width={c.logo.width} height={c.logo.height} /> : <span>{c.name}</span>;
+              return (
+                <li key={c.name}>
+                  {c.href ? (
+                    <a href={c.href} target="_blank" rel="noopener noreferrer" aria-label={`${c.name} (opens in a new tab)`}>{inner}</a>
+                  ) : (
+                    inner
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+        )}
+      </div>
+    </section>
+  );
+}
+
 /** Real testimonials when you have them; otherwise nothing (the Principles block stands in). */
 export function Testimonials() {
   if (testimonials.length === 0) return null;
@@ -51,6 +90,7 @@ export function Testimonials() {
             <figure className="quote" key={t.name + t.company} data-reveal>
               <blockquote>&ldquo;{t.quote}&rdquo;</blockquote>
               <figcaption>
+                {t.photo && <Image className="quote__photo" src={t.photo} alt={`Photo of ${t.name}`} width={48} height={48} />}
                 <b>{t.name}</b>
                 <span>
                   {t.role}, {t.company}

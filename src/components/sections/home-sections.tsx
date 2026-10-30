@@ -1,7 +1,8 @@
 import Link from "next/link";
 import { projects, type Project } from "@/content/portfolio";
 import { services, type Service } from "@/content/services";
-import { capabilities, devFeatures, heroMessages, packageNote, packages, principles, process, whyUs } from "@/content/site-content";
+import { capabilities, devFeatures, heroMessages, packageNote, packages, principles, problems, process, whyUs } from "@/content/site-content";
+import { site } from "@/config/site";
 import { Arrow, Icon } from "@/components/ui/icons";
 import { Browser, ChartCard, PhoneMock, SiteMock, SocialCard } from "@/components/ui/mocks";
 import { ParallaxStage } from "@/components/ui/parallax-stage";
@@ -14,19 +15,23 @@ export function Hero() {
       <div className="container hero__grid">
         <div className="hero__copy">
           <p className="eyebrow hero-in" style={{ "--d": "0ms" } as React.CSSProperties}>
-            Independent digital agency · Working worldwide
+            Websites and marketing for growing businesses · Working worldwide
           </p>
           <h1 className="h1" id="hero-title">
-            <span className="h-line" style={{ "--d": "90ms" } as React.CSSProperties}>Build a Stronger Digital Presence.</span>{" "}
-            <span className="h-line" style={{ "--d": "230ms" } as React.CSSProperties}><em>Turn More Clicks Into Customers.</em></span>
+            <span className="h-line" style={{ "--d": "90ms" } as React.CSSProperties}>Get More Customers</span>{" "}
+            <span className="h-line" style={{ "--d": "230ms" } as React.CSSProperties}><em>From Your Website and Social Media.</em></span>
           </h1>
           <RotatingText messages={heroMessages} startDelay={900} />
           <div className="hero__actions hero-in" style={{ "--d": "1100ms" } as React.CSSProperties}>
-            <ButtonLink href="/contact">Let&apos;s Talk About Your Project</ButtonLink>
-            <ButtonLink href="/work" variant="ghost-dark" arrow={false}>Explore Our Work</ButtonLink>
+            {site.bookingUrl ? (
+              <ButtonLink href={site.bookingUrl} external>Book a Free Strategy Call</ButtonLink>
+            ) : (
+              <ButtonLink href="/contact#book">Book a Free Strategy Call</ButtonLink>
+            )}
+            <ButtonLink href="/services" variant="ghost-dark" arrow={false}>See How We Can Help</ButtonLink>
           </div>
           <p className="hero__trust hero-in" style={{ "--d": "1250ms" } as React.CSSProperties}>
-            Digital strategy, creative execution, and development, all working together.
+            Free first call · No obligation · A written quote before any work starts
           </p>
         </div>
 
@@ -91,6 +96,31 @@ export function FactsBand() {
   );
 }
 
+/** "Sound familiar?": the visitor's own problems in their own words, each with a plain answer. */
+export function ProblemsSolved() {
+  return (
+    <section className="section section--soft" aria-labelledby="problems-title">
+      <div className="container">
+        <SectionHead eyebrow="Sound familiar?" title={<>Common Problems We <em>Help You Fix</em></>} id="problems-title">
+          Most of our clients come to us with one of these. Tell us which one is yours and we will show you the simplest way to solve it.
+        </SectionHead>
+        <ul className="grid-3 problems">
+          {problems.map((p, i) => (
+            <li className="card problem" key={p.q} data-reveal style={{ "--d": `${(i % 3) * 70}ms` } as React.CSSProperties}>
+              <p className="problem__q">&ldquo;{p.q}&rdquo;</p>
+              <p className="problem__a">{p.a}</p>
+              <Link className="card-link" href={p.href}>
+                How we fix this
+                <Arrow />
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}
+
 export function ServiceCard({ service, delay = 0 }: { service: Service; delay?: number }) {
   return (
     <li className="card" data-reveal style={{ "--d": `${delay}ms` } as React.CSSProperties}>
@@ -115,7 +145,7 @@ export function ServicesSection() {
     <section className="section" id="services" aria-labelledby="services-title">
       <div className="container">
         <SectionHead eyebrow="Services" title={<>Everything You Need to <em>Grow Online</em></>} id="services-title">
-          From your first website to a more effective marketing strategy, we bring your digital presence together under one roof.
+          Websites, social media, search, ads and content, all handled by one team so everything works together and you only explain your business once.
         </SectionHead>
         <ul className="grid-3">
           {services.map((s, i) => (
